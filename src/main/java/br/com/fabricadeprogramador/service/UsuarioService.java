@@ -1,29 +1,35 @@
 package br.com.fabricadeprogramador.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import br.com.fabricadeprogramador.dao.UsuarioDAO;
+import br.com.fabricadeprogramador.dao.DAO;
+import br.com.fabricadeprogramador.dao.DAOException;
 import br.com.fabricadeprogramador.entidade.Usuario;
 
 @Service
 public class UsuarioService {
-	
+
 	@Autowired
-	private UsuarioDAO usuarioDAO;
+	@Qualifier("usuarioDAO")
+	private DAO usuarioDAO;
+	
 	public void salvar(Usuario usuario) throws ServiceException{
-		if(usuario.getSenha()=="11111"){
-		throw new ServiceException("Senha fraca!");
+		
+		if (usuario.getSenha()=="111111"){
+			
+			throw new ServiceException("Senha com numero repetido!");
 		}
-		try{
+		
+		try {
 			usuarioDAO.salvar(usuario);
-		}catch(Throwable e){
+		} catch (DAOException e) {
 			
 			throw new ServiceException(e);
 		}
+		
 	}
-
-
-
+	
 }
+
