@@ -26,4 +26,15 @@ public class MensagemUtil {
 		
 	}
 
+	public static void mensagemExcluidoSucesso() {
+		//Obejto de mensagem
+		FacesMessage mensagemInfo = new FacesMessage(FacesMessage.SEVERITY_INFO, "Excluido com sucesso!",null);
+		
+		//Acessando o contexto do JSF
+		FacesContext contextJSF = FacesContext.getCurrentInstance();
+		//Adicionando mensagem no contexto do JSF
+		contextJSF.addMessage(null, mensagemInfo);
+		
+	}
+
 }

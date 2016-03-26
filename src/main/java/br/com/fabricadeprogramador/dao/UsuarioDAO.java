@@ -27,17 +27,20 @@ public class UsuarioDAO implements DAO<Usuario> {
 	}
 	
 	@Transactional
-	public void salvar(Usuario usuario) throws DAOException{
+	public Usuario salvar(Usuario usuario) throws DAOException{
 		try{
 			em.merge(usuario);
 		}catch (Exception e ){
 			//Lancando exception encapsulando a causa
 			throw new DAOException(e);
 		}
+		return usuario;
 	}
 	
 	@Transactional
 	public void excluir (Usuario usuario){
+		//Tronando Managed
+		usuario= em.find(Usuario.class, usuario.getId());
 		em.remove(usuario);
 	}
 	
